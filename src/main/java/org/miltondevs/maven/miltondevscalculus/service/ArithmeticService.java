@@ -4,6 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * Arithmetic service implementation class.
+ * 
+ * Constains the business logic for arithmetic operations.
+ * 
+ * @author Mario Benito Rodriguez
+ *
+ */
 @Service
 public class ArithmeticService implements IArithmeticService {
 
