@@ -18,3 +18,26 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 ```shell
 mvn spring-boot:run
 ```
+
+While running, you can access to the following endpoints (calculator API):
+
+* /arithmetic/addition. Require at least two query parameters with tag param. Examples:
+    * http://localhost:8080/arithmetic/addition?param=1&param=2&param=5 => returning: 8
+    * http://localhost:8080/arithmetic/addition?param=1&param=2 => returning: 3
+    * http://localhost:8080/arithmetic/addition?param=50 => returning: bad request - 400
+    * http://localhost:8080/arithmetic/addition?param=50&a=test&param=67 => returning: 117
+* /arithmetic/subtract. Require at least two query parameters with tag param. Examples:
+    * http://localhost:8080/arithmetic/subtract?param=10&param=4 => returning: 6
+    * http://localhost:8080/arithmetic/subtract?param=2&param=20 => returning: -18
+    * http://localhost:8080/arithmetic/subtract?param=10 => returning: bad request - 400
+    * http://localhost:8080/arithmetic/subtract?param=10&param=20&param=ab => returning: bad request - 400
+
+## Running the unit tests
+
+The same as execution, you can run them with IDE option with JUnit project build.
+
+A more manually way is by using this in the root project:
+
+```shell
+mvn test
+```

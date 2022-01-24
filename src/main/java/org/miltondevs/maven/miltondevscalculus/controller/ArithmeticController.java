@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.corp.calculator.TracerImpl;
+
 /**
  * API REST Controller for arithmetic operations.
  * 
@@ -26,6 +28,10 @@ import org.springframework.web.server.ResponseStatusException;
 public class ArithmeticController {
 
 	private IArithmeticService arithmeticService;
+	
+	// TracerImpl class is not implementing the interface at all 
+	// (this should be TracerAPI as type instead)
+	private TracerImpl tracerAPI;
 
 	/**
 	 * Creates a new arithmetic controller with service associated.
@@ -35,6 +41,7 @@ public class ArithmeticController {
 	@Autowired
 	public ArithmeticController(IArithmeticService arithmeticService) {
 		this.arithmeticService = arithmeticService;
+		this.tracerAPI = new TracerImpl();
 	}
 
 	private void validate(List<Float> parameters) {
@@ -43,6 +50,10 @@ public class ArithmeticController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 					"You must provide at least two query parameters");
 		}
+	}
+	
+	private <T> void registerOperation(T result) {
+		tracerAPI.trace(result);
 	}
 
 	/**
@@ -54,11 +65,15 @@ public class ArithmeticController {
 	 * @param parameters
 	 * @return The summary of parameters
 	 */
-	@GetMapping("/summary")
+	@GetMapping("/addition")
 	public ResponseEntity<Float> summaryOperation(
 			@RequestParam(name = "param") List<Float> parameters) {
-		this.validate(parameters);
-		return ResponseEntity.ok(this.arithmeticService.summaryOperation(parameters));
+		validate(parameters);
+		
+		float result = arithmeticService.summaryOperation(parameters);
+		
+		registerOperation(result);
+		return ResponseEntity.ok(result);
 	}
 
 	/**
@@ -70,11 +85,15 @@ public class ArithmeticController {
 	 * @param parameters
 	 * @return The subtraction of the parameters
 	 */
-	@GetMapping("/substract")
+	@GetMapping("/subtract")
 	public ResponseEntity<Float> subtractOperation(
 			@RequestParam(name = "param") List<Float> parameters) {
-		this.validate(parameters);
-		return ResponseEntity.ok(this.arithmeticService.subtractOperation(parameters));
+		validate(parameters);
+		
+		float result = arithmeticService.subtractOperation(parameters);
+		
+		registerOperation(result);
+		return ResponseEntity.ok(result);
 	}
 
 }
