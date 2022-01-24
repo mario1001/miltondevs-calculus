@@ -26,5 +26,5 @@ public interface IArithmeticService {
 	 * @param parameters List of float values (expecting float always)
 	 * @return The subtraction of values
 	 */
-	float substractOperation(List<Float> parameters);
+	float subtractOperation(List<Float> parameters);
 }

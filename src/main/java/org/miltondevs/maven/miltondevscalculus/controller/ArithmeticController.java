@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 /**
  * API REST Controller for arithmetic operations.
  * 
- * Constains for now only two operations: summary and substract applied to query
+ * Contains for now only two operations: summary and subtract applied to query
  * parameters in a list.
  * 
  * @author Mario Benito Rodriguez
@@ -30,18 +30,18 @@ public class ArithmeticController {
 	/**
 	 * Creates a new arithmetic controller with service associated.
 	 * 
-	 * @param arithmeticService Arithmetic service instance to serve this
-	 *                          endpoint
+	 * @param arithmeticService Arithmetic service instance to serve this controller
 	 */
 	@Autowired
 	public ArithmeticController(IArithmeticService arithmeticService) {
 		this.arithmeticService = arithmeticService;
 	}
 
-	public void validate(List<Float> parameters) {
+	private void validate(List<Float> parameters) {
 		if (parameters.size() == 1) {
 			// Throw bad request exception in this case
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "HTTP Status will be NOT FOUND (CODE 404)\n");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					"You must provide at least two query parameters");
 		}
 	}
 
@@ -58,8 +58,7 @@ public class ArithmeticController {
 	public ResponseEntity<Float> summaryOperation(
 			@RequestParam(name = "param") List<Float> parameters) {
 		this.validate(parameters);
-		return ResponseEntity
-				.ok(this.arithmeticService.summaryOperation(parameters));
+		return ResponseEntity.ok(this.arithmeticService.summaryOperation(parameters));
 	}
 
 	/**
@@ -72,11 +71,10 @@ public class ArithmeticController {
 	 * @return The subtraction of the parameters
 	 */
 	@GetMapping("/substract")
-	public ResponseEntity<Float> substractOperation(
+	public ResponseEntity<Float> subtractOperation(
 			@RequestParam(name = "param") List<Float> parameters) {
 		this.validate(parameters);
-		return ResponseEntity
-				.ok(this.arithmeticService.substractOperation(parameters));
+		return ResponseEntity.ok(this.arithmeticService.subtractOperation(parameters));
 	}
 
 }

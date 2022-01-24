@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 /**
  * Arithmetic service implementation class.
  * 
- * Constains the business logic for arithmetic operations.
+ * Contains the business logic for arithmetic operations.
  * 
  * @author Mario Benito Rodriguez
  *
@@ -21,7 +21,7 @@ public class ArithmeticService implements IArithmeticService {
 	}
 
 	@Override
-	public float substractOperation(List<Float> parameters) {
+	public float subtractOperation(List<Float> parameters) {
 		float firstParameter = parameters.remove(0);
 		return parameters.stream().reduce(firstParameter, (acumulator, element) -> acumulator - element);
 	}
