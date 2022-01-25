@@ -13,12 +13,12 @@ import java.util.List;
 public interface IArithmeticService {
 
 	/**
-	 * Method for getting the summary of a list of float values.
+	 * Method for getting the addition of a list of float values.
 	 * 
 	 * @param parameters List of float values (expecting float always)
-	 * @return The summary of values
+	 * @return The sum of values
 	 */
-	float summaryOperation(List<Float> parameters);
+	float additionOperation(List<Float> parameters);
 	
 	/**
 	 * Method for getting the subtraction of a list of float values.

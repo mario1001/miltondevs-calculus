@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class ArithmeticService implements IArithmeticService {
 
 	@Override
-	public float summaryOperation(List<Float> parameters) {
+	public float additionOperation(List<Float> parameters) {
 		return parameters.stream().reduce((float) 0, (acumulator, element) -> acumulator + element);
 	}
 

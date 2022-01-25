@@ -17,41 +17,41 @@ public class ArithmeticControllerTestIT {
 
 	@Autowired
 	private ArithmeticController arithmeticController;
-	
+
 	@Test
-	public void testSummaryBadRequestUniqueParameter() {
+	public void testAdditionBadRequestUniqueParameter() {
 		List<Float> parameters = new ArrayList<>();
 		parameters.add((float) 5.3);
-		
+
 		try {
-			arithmeticController.summaryOperation(parameters);
+			arithmeticController.additionOperation(parameters);
 		} catch (ResponseStatusException e) {
 			assertEquals(e.getStatus(), HttpStatus.BAD_REQUEST);
 			assertEquals(e.getReason(), "You must provide at least two query parameters");
 		}
 	}
-	
+
 	@Test
-	public void testSummaryHTTPOkResponse() {
+	public void testAdditionHTTPOkResponse() {
 		List<Float> parameters = new ArrayList<>();
 		parameters.add((float) 5.3);
 		parameters.add((float) 5);
 		parameters.add((float) 10.789);
-		
-		ResponseEntity<Float> response = arithmeticController.summaryOperation(parameters);
-		
+
+		ResponseEntity<Float> response = arithmeticController.additionOperation(parameters);
+
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
 		assertEquals(response.getBody(), (float) 21.08900);
 	}
-	
+
 	@Test
 	public void testSubtractHTTPOkResponse() {
 		List<Float> parameters = new ArrayList<>();
 		parameters.add((float) 2);
 		parameters.add((float) 5);
-		
+
 		ResponseEntity<Float> response = arithmeticController.subtractOperation(parameters);
-		
+
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
 		assertEquals(response.getBody(), (float) -3);
 	}

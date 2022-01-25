@@ -66,11 +66,11 @@ public class ArithmeticController {
 	 * @return The summary of parameters
 	 */
 	@GetMapping("/addition")
-	public ResponseEntity<Float> summaryOperation(
+	public ResponseEntity<Float> additionOperation(
 			@RequestParam(name = "param") List<Float> parameters) {
 		validate(parameters);
 		
-		float result = arithmeticService.summaryOperation(parameters);
+		float result = arithmeticService.additionOperation(parameters);
 		
 		registerOperation(result);
 		return ResponseEntity.ok(result);
