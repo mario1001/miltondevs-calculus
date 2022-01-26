@@ -44,6 +44,14 @@ public class ArithmeticController {
 		this.tracerAPI = new TracerImpl();
 	}
 
+	/**
+	 * Private method for checking if list of parameters is valid or not.
+	 * 
+	 * There's a condition here: query parameters must be two or more always
+	 * for operations in this API.
+	 * 
+	 * @param parameters List of parameters to use in the operation
+	 */
 	private void validate(List<Float> parameters) {
 		if (parameters.size() == 1) {
 			// Throw bad request exception in this case
@@ -52,6 +60,15 @@ public class ArithmeticController {
 		}
 	}
 	
+	/**
+	 * Private method for registering an operation using tracer API.
+	 * 
+	 * Tracer API interface and implementation are offered within external jar
+	 * and used here for recording exposed operations here.
+	 * 
+	 * @param <T> Type of the result (generic one)
+	 * @param result value to be saved within tracer API
+	 */
 	private <T> void registerOperation(T result) {
 		tracerAPI.trace(result);
 	}
